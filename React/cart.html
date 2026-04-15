@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cart – Gilded Cosmetics</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+  <nav>
+    <a class="nav-brand" href="#home">Gilded</span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="account-checkout.html">Account</a></li>
+      </ul>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <h1 class="page-title">My <span>Cart</span></h1>
+      <p class="page-subtitle">2 items selected</p>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="cart-summary">
+      <div class="summary-totals">
+        <div class="summary-item">
+          <span class="summary-label">Items</span>
+          <span class="summary-val">2</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Shipping</span>
+          <span class="summary-val">₱ 240</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Order Total</span>
+          <span class="summary-val">₱ 3,070</span>
+        </div>
+      </div>
+      <button class="btn-checkout-main">Checkout All</button>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/cart.js"></script>
+</body>
+
+</html>
+
+

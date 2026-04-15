@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded | Account Access</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+  <nav>
+    <a class="nav-brand" href="home.html">Gilded</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="account-checkout.html">Account</a></li>
+    </ul>
+  </nav>
+
+  <main class="auth-page">
+    <section class="auth-shell" id="authContainer">
+      <div class="auth-intro">
+        <p class="auth-kicker">Member Access</p>
+        <h1 class="auth-heading">A smoother way to manage your appointments, orders, and checkout details.</h1>
+        <p class="auth-copy">
+          Sign in to keep your beauty routine organized, revisit previous bookings, and save your information for faster
+          checkout next time.
+        </p>
+
+        <div class="auth-actions">
+          <a class="intro-link primary" href="booking.html">Book a Visit</a>
+          <a class="intro-link" href="orders.html">View Orders</a>
+        </div>
+
+        <div class="auth-highlights">
+          <div class="highlight-card">
+            <span class="highlight-label">Appointments</span>
+            <strong>Schedule with less friction</strong>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-label">Orders</span>
+            <strong>Track purchases in one place</strong>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-label">Checkout</span>
+            <strong>Save your essentials for later</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-panel">
+        <div id="loginForm" class="auth-form active">
+          <p class="form-kicker">Welcome back</p>
+          <h2>Log in</h2>
+
+          <div class="input-group">
+            <label for="login-identity">Email or Phone Number</label>
+            <input id="login-identity" type="text" placeholder="your@email.com">
+          </div>
+
+          <div class="input-group">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" placeholder="Enter your password">
+          </div>
+
+          <div class="row-space">
+            <label class="checkbox-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="forgot">Forgot Password?</a>
+          </div>
+
+          <button class="btn-main" type="button">Log in</button>
+
+          <p class="social-text">Log in with</p>
+          <div class="social-btns">
+            <button class="social-btn" type="button">Google</button>
+            <button class="social-btn" type="button">Apple</button>
+          </div>
+
+          <p class="toggle-text">Don't have an account? <span onclick="toggleAuth()">Create one now</span></p>
+        </div>
+
+        <div id="signupForm" class="auth-form">
+          <p class="form-kicker">New to Gilded</p>
+          <h2>Create Account</h2>
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="signup-name">Full Name</label>
+              <input id="signup-name" type="text" placeholder="Full Name">
+            </div>
+            <div class="input-group">
+              <label for="signup-phone">Contact / Phone No.</label>
+              <input id="signup-phone" type="text" placeholder="09XX XXX XXXX">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="signup-email">Email Address</label>
+            <input id="signup-email" type="email" placeholder="your@email.com">
+          </div>
+
+          <div class="input-group">
+            <label for="signup-password">Password</label>
+            <input id="signup-password" type="password" placeholder="Create a password">
+          </div>
+
+          <label class="checkbox-label terms-check">
+            <input type="checkbox">
+            <span>
+              I agree to the
+              <button class="inline-link" type="button" onclick="openTerms()">Terms and Privacy Policy</button>
+            </span>
+          </label>
+
+          <button class="btn-main" type="button">Create Account</button>
+
+          <p class="social-text">Create using</p>
+          <div class="social-btns">
+            <button class="social-btn" type="button">Google</button>
+            <button class="social-btn" type="button">Apple</button>
+          </div>
+
+          <p class="toggle-text">Already have an account? <span onclick="toggleAuth()">Log in here</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="termsPopup" class="glass-overlay">
+    <div class="glass-container">
+      <button class="close-x" type="button" onclick="closeTerms()">&times;</button>
+
+      <div class="glass-content">
+        <span class="corp-label">Global Legal Operations</span>
+        <h3>Terms of Service &amp; Privacy</h3>
+        <p class="last-revised">Revised: March 2026</p>
+
+        <div class="scroll-area">
+          <h4>1. Digital Atelier Access</h4>
+          <p>
+            By interfacing with our global digital architecture, you acknowledge a binding legal agreement with
+            Gilded Global Holdings. Our aesthetic services are governed by international luxury standards.
+          </p>
+
+          <h4>2. Data Sovereignty</h4>
+          <p>
+            We treat your personal data with the same precision as our salon treatments. Your information is encrypted
+            and managed under strict corporate governance protocols.
+          </p>
+
+          <h4>3. Service Excellence</h4>
+          <p>
+            The Corporation reserves the right to refine service formulations and pricing tiers to preserve the highest
+            levels of professional excellence across all branches.
+          </p>
+        </div>
+
+        <button class="glass-btn-close" type="button" onclick="closeTerms()">Acknowledge &amp; Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/login.js">
+    const authContainer = document.getElementById('authContainer');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const termsPopup = document.getElementById('termsPopup');
+
+    function setAuthMode(mode) {
+      const isSignup = mode === 'signup';
+
+      authContainer?.classList.toggle('signup-active', isSignup);
+      loginForm?.classList.toggle('active', !isSignup);
+      signupForm?.classList.toggle('active', isSignup);
+    }
+
+    function toggleAuth() {
+      const nextMode = signupForm?.classList.contains('active') ? 'login' : 'signup';
+      setAuthMode(nextMode);
+    }
+
+    function openTerms() {
+      if (!termsPopup) return;
+      termsPopup.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTerms() {
+      if (!termsPopup) return;
+      termsPopup.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    window.toggleAuth = toggleAuth;
+    window.openTerms = openTerms;
+    window.closeTerms = closeTerms;
+
+    window.addEventListener('click', (event) => {
+      if (event.target === termsPopup) {
+        closeTerms();
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeTerms();
+      }
+    });
+
+    setAuthMode('login');
+
+  </script>
+</body>
+
+</html>

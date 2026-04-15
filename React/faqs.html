@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQs - Gilded Cosmetics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/faqs.css">
+</head>
+
+<body>
+  <div class="faq-hero">
+    <h1>Frequently <em>Asked</em> Questions</h1>
+    <p>We're here to help you with any questions or concerns</p>
+  </div>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <select class="search-filter" id="filterSelect">
+        <option value="all">All</option>
+        <option value="appointments-booking">Appointments &amp; Booking</option>
+        <option value="services-pricing">Services &amp; Pricing</option>
+        <option value="products-aftercare">Products &amp; Aftercare</option>
+        <option value="orders-delivery">Orders &amp; Delivery</option>
+        <option value="shipping-returns">Shipping &amp; Returns</option>
+        <option value="account-payments">Account &amp; Payments</option>
+      </select>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search questions..." />
+      <button class="search-btn" id="searchBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke-width="1.8" />
+          <path d="M16.5 16.5L21 21" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-pills">
+    <button class="pill active" data-cat="all">All</button>
+    <button class="pill" data-cat="appointments-booking">Appointments &amp; Booking</button>
+    <button class="pill" data-cat="services-pricing">Services &amp; Pricing</button>
+    <button class="pill" data-cat="products-aftercare">Products &amp; Aftercare</button>
+    <button class="pill" data-cat="orders-delivery">Orders &amp; Delivery</button>
+    <button class="pill" data-cat="shipping-returns">Shipping &amp; Returns</button>
+    <button class="pill" data-cat="account-payments">Account &amp; Payments</button>
+  </div>
+
+  <div class="faq-page" id="faqContainer"></div>
+
+  <div class="no-results" id="noResults">
+    <p>No questions found. Try a different search term.</p>
+  </div>
+  
+  <script type="module" src="scripts/faqs.js"></script>
+</body>
+
+</html>

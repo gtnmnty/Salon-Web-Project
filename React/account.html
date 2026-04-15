@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Account & Checkout</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #4a9d8f;
+    --teal-light: #6bb8ac;
+    --teal-dark: #337065;
+    --bg: #e8e8e8;
+    --card-bg: #f0f0f0;
+    --border: #c0c0c0;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --white: #fafafa;
+    --danger: #b84a4a;
+    --input-bg: #fff;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 48px;
+    height: 72px;
+    gap: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  nav a:hover { color: var(--teal); }
+  nav a.active { color: var(--teal); font-weight: 500; }
+
+  /* ── PAGE WRAPPER ── */
+  .page { display: none; padding: 40px 48px 60px; }
+  .page.active { display: block; }
+
+  /* ── ACCOUNT PAGE ── */
+  .account-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  /* Profile header */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .avatar svg { opacity: 0.35; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .avatar-input { display: none; }
+
+  .profile-info { flex: 1; }
+  .profile-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .profile-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .btn:hover { background: var(--bg); border-color: #aaa; }
+  .btn-teal { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .btn-teal:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+  .btn-danger { color: var(--danger); border-color: var(--danger); }
+  .btn-danger:hover { background: var(--danger); color: #fff; }
+  .btn-sm { padding: 6px 14px; font-size: 12px; }
+
+  /* Body split */
+  .account-body {
+    display: flex;
+    min-height: 380px;
+  }
+  .account-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .sidebar-group { margin-bottom: 4px; }
+  .sidebar-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 8px 24px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-transform: uppercase;
+    font-size: 11.5px;
+  }
+  .sidebar-label:hover { color: var(--teal); }
+  .sidebar-label.active { color: var(--teal); }
+  .sidebar-sub {
+    padding-left: 36px;
+  }
+  .sidebar-sub a {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .sidebar-sub a:hover { color: var(--teal); }
+  .sidebar-sub a.active { color: var(--teal); font-weight: 500; }
+
+  /* Content panel */
+  .account-content {
+    flex: 1;
+    padding: 24px 32px;
+  }
+  .content-panel { display: none; }
+  .content-panel.active { display: block; }
+
+  .panel-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  /* Info fields */
+  .info-field {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    background: var(--white);
+    transition: border-color 0.2s;
+  }
+  .info-field:focus-within { border-color: var(--teal); }
+  .field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    min-width: 130px;
+    border-right: 1px solid var(--border);
+    background: var(--card-bg);
+    letter-spacing: 0.03em;
+  }
+  .field-value {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    flex: 1;
+    font-family: 'Jost', sans-serif;
+    color: var(--text);
+  }
+  .field-input {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+    color: var(--text);
+    display: none;
+  }
+  .field-input::selection { background: var(--teal); color: #fff; }
+
+  /* editing state */
+  .account-content.editing .field-value { display: none; }
+  .account-content.editing .field-input { display: block; }
+  .account-content.editing .info-field { background: var(--input-bg); }
+
+  .submit-row { margin-top: 8px; }
+
+  /* Preferences */
+  .pref-section { margin-bottom: 24px; }
+  .pref-title {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .pref-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pref-chip {
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
+    user-select: none;
+  }
+  .pref-chip:hover { border-color: var(--teal); color: var(--teal); }
+  .pref-chip.selected {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+  }
+  .pref-save-row { margin-top: 20px; }
+
+  /* Address & Payment placeholder */
+  .placeholder-msg {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    padding: 32px 0;
+    text-align: center;
+    border: 1px dashed var(--border);
+  }
+
+  /* Appointments / Orders table */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .badge-green { background: #d4edda; color: #1e7e34; }
+  .badge-yellow { background: #fff3cd; color: #856404; }
+  .badge-gray { background: #e2e2e2; color: #555; }
+
+  /* Help */
+  .help-list { list-style: none; }
+  .help-list li {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    font-size: 13.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .help-list li:hover { color: var(--teal); }
+  .help-list li:last-child { border-bottom: none; }
+  .help-arrow { font-size: 16px; color: var(--text-muted); }
+
+  /* ── CHECKOUT PAGE ── */
+  .checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .checkout-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .section-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .section-body { padding: 20px; }
+
+  .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .co-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .co-field label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .co-input {
+    font-family: 'Jost', sans-serif;
+    font-size: 13.5px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .co-input:focus { border-color: var(--teal); }
+  .co-full { grid-column: 1 / -1; }
+
+  .same-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .same-info-row input[type="checkbox"] { accent-color: var(--teal); width: 14px; height: 14px; cursor: pointer; }
+
+  /* Order item */
+  .order-item {
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    background: var(--white);
+  }
+  .order-item:last-child { margin-bottom: 0; }
+  .item-name { font-weight: 500; font-size: 14px; margin-bottom: 6px; }
+  .item-row { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); margin-bottom: 3px; }
+  .item-row strong { color: var(--text); }
+
+  /* Payment method tabs */
+  .pay-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .pay-tab {
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-transform: uppercase;
+  }
+  .pay-tab:hover { border-color: var(--teal); }
+  .pay-tab.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  .pay-form { display: none; }
+  .pay-form.active { display: block; }
+
+  /* Summary card */
+  .summary-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px 20px;
+    position: sticky;
+    top: 88px;
+  }
+  .summary-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+  }
+  .summary-row.total {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  .summary-row strong { color: var(--text); }
+
+  .note-box {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    margin: 16px 0;
+    line-height: 1.6;
+  }
+  .place-order-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .place-order-btn:hover { background: var(--teal-dark); }
+
+  .checkout-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-bottom: 20px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .checkout-back:hover { color: var(--teal); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 36px 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+  .modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .modal p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--teal);
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    padding: 10px 24px;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 16px; gap: 18px; }
+    .page { padding: 24px 16px 48px; }
+    .account-body { flex-direction: column; }
+    .account-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+    .checkout-layout { grid-template-columns: 1fr; }
+    .checkout-grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" onclick="navigate('home')">Home</a>
+  <a href="#" onclick="navigate('services')">Services</a>
+  <a href="#" onclick="navigate('products')">Products</a>
+  <a href="#" onclick="navigate('book')">Book Now</a>
+  <a href="#" onclick="navigate('cart')">Cart</a>
+  <a href="#" onclick="navigate('account')" id="nav-account" class="active">Account</a>
+</nav>
+
+<!-- ════════════════ ACCOUNT PAGE ════════════════ -->
+<div id="page-account" class="page active">
+  <div class="account-card">
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="avatar-wrap">
+        <div class="avatar" id="avatar-display">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="9" stroke="#888" stroke-width="2"/>
+            <path d="M6 42c0-10 7-16 18-16s18 6 18 16" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <img id="avatar-img" src="" alt="Profile"/>
+        </div>
+        <input type="file" id="avatar-input" class="avatar-input" accept="image/*"/>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name" id="display-name">Jon Snow</div>
+        <div class="profile-actions">
+          <button class="btn btn-sm btn-teal" onclick="document.getElementById('avatar-input').click()">Update Profile</button>
+          <button class="btn btn-sm" id="auth-btn" onclick="toggleAuth()">Sign In</button>
+          <button class="btn btn-sm btn-danger" onclick="openDeleteModal()">Delete Account</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="account-body">
+
+      <!-- Sidebar -->
+      <div class="account-sidebar">
+        <div class="sidebar-group">
+          <span class="sidebar-label active" onclick="toggleGroup(this)">Account Settings</span>
+          <div class="sidebar-sub">
+            <a class="active" onclick="showPanel('profile')">Profile Information</a>
+            <a onclick="showPanel('address')">Address</a>
+            <a onclick="showPanel('payment')">Payment Method</a>
+            <a onclick="showPanel('preferences')">Preferences</a>
+          </div>
+        </div>
+        <div class="sidebar-group">
+          <span class="sidebar-label" onclick="showPanel('appointments')">Appointments</span>
+        </div>
+        <div class="sidebar-group">
+          <span class="sidebar-label" onclick="showPanel('orders')">Orders</span>
+        </div>
+        <div class="sidebar-group">
+          <span class="sidebar-label" onclick="showPanel('help')">Help &amp; Support</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="account-content" id="account-content">
+
+        <!-- PROFILE INFORMATION -->
+        <div class="content-panel active" id="panel-profile">
+          <div class="panel-header">
+            <button class="btn btn-sm" id="edit-btn" onclick="toggleEdit()">Edit</button>
+          </div>
+
+          <div class="info-field">
+            <div class="field-label">Name</div>
+            <div class="field-value" id="val-name">Jon Snow</div>
+            <input class="field-input" id="inp-name" type="text" value="Jon Snow" onfocus="this.select()"/>
+          </div>
+          <div class="info-field">
+            <div class="field-label">Email</div>
+            <div class="field-value" id="val-email">jdncanthtall8678@mail.com</div>
+            <input class="field-input" id="inp-email" type="email" value="jdncanthtall8678@mail.com" onfocus="this.select()"/>
+          </div>
+          <div class="info-field">
+            <div class="field-label">Contact No.</div>
+            <div class="field-value" id="val-phone">09354334633</div>
+            <input class="field-input" id="inp-phone" type="tel" value="09354334633" onfocus="this.select()"/>
+          </div>
+          <div class="info-field">
+            <div class="field-label">Birthday</div>
+            <div class="field-value" id="val-bday">02-01-1500</div>
+            <input class="field-input" id="inp-bday" type="text" value="02-01-1500" onfocus="this.select()"/>
+          </div>
+          <div class="info-field">
+            <div class="field-label">Password</div>
+            <div class="field-value">••••••••••</div>
+            <input class="field-input" id="inp-pass" type="password" placeholder="New password" onfocus="this.select()"/>
+          </div>
+
+          <div class="submit-row" id="save-row" style="display:none;">
+            <button class="btn btn-teal btn-sm" onclick="saveProfile()">Save Changes</button>
+            <button class="btn btn-sm" onclick="cancelEdit()" style="margin-left:8px;">Cancel</button>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="content-panel" id="panel-address">
+          <div class="panel-header">
+            <button class="btn btn-sm btn-teal" onclick="showToast('Address saved!')">+ Add Address</button>
+          </div>
+          <div class="placeholder-msg">No saved addresses yet.</div>
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="content-panel" id="panel-payment">
+          <div class="panel-header">
+            <button class="btn btn-sm btn-teal" onclick="showToast('Payment method added!')">+ Add Method</button>
+          </div>
+          <div class="placeholder-msg">No saved payment methods yet.</div>
+        </div>
+
+        <!-- PREFERENCES -->
+        <div class="content-panel" id="panel-preferences">
+          <div class="pref-section">
+            <div class="pref-title">Notifications</div>
+            <div class="pref-options">
+              <div class="pref-chip selected" onclick="toggleChip(this)">Email</div>
+              <div class="pref-chip" onclick="toggleChip(this)">SMS</div>
+              <div class="pref-chip selected" onclick="toggleChip(this)">Push</div>
+              <div class="pref-chip" onclick="toggleChip(this)">In-App</div>
+            </div>
+          </div>
+          <div class="pref-section">
+            <div class="pref-title">Newsletter</div>
+            <div class="pref-options">
+              <div class="pref-chip selected" onclick="toggleChip(this)">Product Updates</div>
+              <div class="pref-chip" onclick="toggleChip(this)">Promotions</div>
+              <div class="pref-chip selected" onclick="toggleChip(this)">Tips &amp; Guides</div>
+            </div>
+          </div>
+          <div class="pref-section">
+            <div class="pref-title">Service Interests</div>
+            <div class="pref-options">
+              <div class="pref-chip" onclick="toggleChip(this)">Hair</div>
+              <div class="pref-chip selected" onclick="toggleChip(this)">Skincare</div>
+              <div class="pref-chip" onclick="toggleChip(this)">Nails</div>
+              <div class="pref-chip" onclick="toggleChip(this)">Spa</div>
+              <div class="pref-chip selected" onclick="toggleChip(this)">Makeup</div>
+            </div>
+          </div>
+          <div class="pref-section">
+            <div class="pref-title">Language</div>
+            <div class="pref-options">
+              <div class="pref-chip selected" onclick="toggleChip(this)" data-single="lang">English</div>
+              <div class="pref-chip" onclick="toggleChip(this)" data-single="lang">Filipino</div>
+              <div class="pref-chip" onclick="toggleChip(this)" data-single="lang">日本語</div>
+            </div>
+          </div>
+          <div class="pref-save-row">
+            <button class="btn btn-teal btn-sm" onclick="savePreferences()">Save Preferences</button>
+          </div>
+        </div>
+
+        <!-- APPOINTMENTS -->
+        <div class="content-panel" id="panel-appointments">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Service</th><th>Date</th><th>Time</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Hair Treatment</td><td>Apr 10, 2026</td><td>10:00 AM</td><td><span class="badge badge-green">Confirmed</span></td></tr>
+              <tr><td>Facial</td><td>Apr 15, 2026</td><td>2:00 PM</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+              <tr><td>Manicure</td><td>Mar 22, 2026</td><td>11:30 AM</td><td><span class="badge badge-gray">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="content-panel" id="panel-orders">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order #</th><th>Items</th><th>Total</th><th>Status</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#00412</td><td>Serum, Toner</td><td>₱1,250</td>
+                <td><span class="badge badge-green">Delivered</span></td>
+                <td><a style="color:var(--teal);cursor:pointer;font-size:12px;" onclick="navigate('checkout')">Reorder</a></td>
+              </tr>
+              <tr>
+                <td>#00398</td><td>Moisturizer</td><td>₱680</td>
+                <td><span class="badge badge-yellow">Shipped</span></td>
+                <td><a style="color:var(--teal);cursor:pointer;font-size:12px;">Track</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- HELP -->
+        <div class="content-panel" id="panel-help">
+          <ul class="help-list">
+            <li>FAQs <span class="help-arrow">›</span></li>
+            <li>Contact Support <span class="help-arrow">›</span></li>
+            <li>Return &amp; Refund Policy <span class="help-arrow">›</span></li>
+            <li>Privacy Policy <span class="help-arrow">›</span></li>
+            <li>Terms &amp; Conditions <span class="help-arrow">›</span></li>
+          </ul>
+        </div>
+
+      </div><!-- /account-content -->
+    </div><!-- /account-body -->
+  </div><!-- /account-card -->
+</div>
+
+<!-- ════════════════ CHECKOUT PAGE ════════════════ -->
+<div id="page-checkout" class="page">
+  <a class="checkout-back" onclick="navigate('account')">← Back</a>
+  <div class="checkout-layout">
+
+    <!-- Left col -->
+    <div>
+
+      <!-- Shipping -->
+      <div class="checkout-section">
+        <div class="section-head">Shipping Information</div>
+        <div class="section-body">
+          <label class="same-info-row">
+            <input type="checkbox" id="same-shipping" onchange="fillShipping(this)"/>
+            Same as account info
+          </label>
+          <div class="checkout-grid-2">
+            <div class="co-field">
+              <label>Full Name</label>
+              <input class="co-input" id="sh-name" type="text" placeholder="Full Name"/>
+            </div>
+            <div class="co-field">
+              <label>Contact No.</label>
+              <input class="co-input" id="sh-phone" type="tel" placeholder="Contact No."/>
+            </div>
+            <div class="co-field co-full">
+              <label>Email Address</label>
+              <input class="co-input" id="sh-email" type="email" placeholder="Email Address"/>
+            </div>
+            <div class="co-field co-full">
+              <label>Shipping Address</label>
+              <input class="co-input" id="sh-addr" type="text" placeholder="Street, City, Province, ZIP"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Details -->
+      <div class="checkout-section">
+        <div class="section-head">Order Details</div>
+        <div class="section-body">
+          <div class="order-item">
+            <div class="item-name">Vitamin C Brightening Serum</div>
+            <div class="item-row"><span>Qty:</span><strong>1</strong></div>
+            <div class="item-row"><span>Shipping:</span><strong>₱80</strong></div>
+            <div class="item-row"><span>Total:</span><strong>₱850</strong></div>
+          </div>
+          <div class="order-item">
+            <div class="item-name">Hydra-Boost Toner</div>
+            <div class="item-row"><span>Qty:</span><strong>1</strong></div>
+            <div class="item-row"><span>Shipping:</span><strong>₱80</strong></div>
+            <div class="item-row"><span>Total:</span><strong>₱400</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="checkout-section">
+        <div class="section-head">Payment Method / Information</div>
+        <div class="section-body">
+          <div class="pay-tabs">
+            <button class="pay-tab active" onclick="selectPay('visa',this)">Visa</button>
+            <button class="pay-tab" onclick="selectPay('gcash',this)">GCash</button>
+            <button class="pay-tab" onclick="selectPay('maya',this)">Maya</button>
+            <button class="pay-tab" onclick="selectPay('paypal',this)">PayPal</button>
+            <button class="pay-tab" onclick="selectPay('amex',this)">Amex</button>
+            <button class="pay-tab" onclick="selectPay('cod',this)">COD</button>
+          </div>
+
+          <!-- Visa / Amex card form -->
+          <div class="pay-form active" id="pay-visa">
+            <label class="same-info-row">
+              <input type="checkbox" id="same-billing" onchange="fillBilling(this)"/>
+              Same as account &amp; shipping info
+            </label>
+            <div class="checkout-grid-2">
+              <div class="co-field">
+                <label>Billing Full Name</label>
+                <input class="co-input" id="bi-name" type="text" placeholder="Name on card"/>
+              </div>
+              <div class="co-field co-full">
+                <label>Billing Address</label>
+                <input class="co-input" id="bi-addr" type="text" placeholder="Billing address"/>
+              </div>
+              <div class="co-field co-full">
+                <label>Card Number</label>
+                <input class="co-input" id="bi-card" type="text" placeholder="•••• •••• •••• ••••" maxlength="19" oninput="formatCard(this)"/>
+              </div>
+              <div class="co-field">
+                <label>Expiration Date</label>
+                <input class="co-input" type="text" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)"/>
+              </div>
+              <div class="co-field">
+                <label>CVV</label>
+                <input class="co-input" type="password" placeholder="•••" maxlength="4"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- GCash / Maya / PayPal -->
+          <div class="pay-form" id="pay-gcash">
+            <div class="checkout-grid-2">
+              <div class="co-field co-full">
+                <label>GCash Number</label>
+                <input class="co-input" type="tel" placeholder="09XX XXX XXXX"/>
+              </div>
+            </div>
+          </div>
+          <div class="pay-form" id="pay-maya">
+            <div class="checkout-grid-2">
+              <div class="co-field co-full">
+                <label>Maya Number</label>
+                <input class="co-input" type="tel" placeholder="09XX XXX XXXX"/>
+              </div>
+            </div>
+          </div>
+          <div class="pay-form" id="pay-paypal">
+            <div class="checkout-grid-2">
+              <div class="co-field co-full">
+                <label>PayPal Email</label>
+                <input class="co-input" type="email" placeholder="paypal@email.com"/>
+              </div>
+            </div>
+          </div>
+          <div class="pay-form" id="pay-amex">
+            <!-- same as visa -->
+            <label class="same-info-row">
+              <input type="checkbox" onchange="fillBilling(this)"/>
+              Same as account &amp; shipping info
+            </label>
+            <div class="checkout-grid-2">
+              <div class="co-field">
+                <label>Billing Full Name</label>
+                <input class="co-input" type="text" placeholder="Name on card"/>
+              </div>
+              <div class="co-field co-full">
+                <label>Billing Address</label>
+                <input class="co-input" type="text" placeholder="Billing address"/>
+              </div>
+              <div class="co-field co-full">
+                <label>Card Number</label>
+                <input class="co-input" type="text" placeholder="•••• •••••• •••••" maxlength="17"/>
+              </div>
+              <div class="co-field">
+                <label>Expiration Date</label>
+                <input class="co-input" type="text" placeholder="MM / YY" maxlength="7"/>
+              </div>
+              <div class="co-field">
+                <label>CID</label>
+                <input class="co-input" type="password" placeholder="••••" maxlength="4"/>
+              </div>
+            </div>
+          </div>
+          <div class="pay-form" id="pay-cod">
+            <p style="font-size:13px;color:var(--text-muted);padding:12px 0;">Pay in cash upon delivery. Please have the exact amount ready.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Right col – Summary -->
+    <div>
+      <div class="summary-card">
+        <div class="summary-title">Orders Summary</div>
+        <div class="summary-row"><span>Items (2)</span><strong>₱1,250</strong></div>
+        <div class="summary-row"><span>Shipping</span><strong>₱160</strong></div>
+        <div class="summary-row"><span>Tax (12%)</span><strong>₱150</strong></div>
+        <div class="summary-row total"><span>Total</span><strong>₱1,560</strong></div>
+        <div class="note-box">Please review all information and order details before proceeding.</div>
+        <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════ DELETE MODAL ════════ -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal">
+    <h3>Delete Account</h3>
+    <p>Are you sure you want to permanently delete your account? This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="closeDeleteModal(); showToast('Account deleted.')">Delete</button>
+      <button class="btn" onclick="closeDeleteModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="scripts/account.js"></script>
+</body>
+</html>

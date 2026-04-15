@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <a class="back-link" onclick="history.back()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back
+  </a>
+  <div class="page-title">Checkout</div>
+  <div class="step-label">Review &amp; Place Order</div>
+</header>
+
+<!-- MAIN -->
+<main class="checkout-wrapper">
+
+  <!-- ① ORDER DETAILS CARD -->
+  <div class="card card-order-details">
+    <div class="card-head">
+      <span class="card-title">Order Details</span>
+      <span style="font-size:12px;color:var(--muted);">2 items</span>
+    </div>
+    <div class="card-body">
+      <div class="orders-list">
+
+        <div class="order-item">
+          <div class="item-thumb" aria-hidden="true">
+            <span>Image</span>
+          </div>
+          <div class="item-info">
+            <div class="item-name">Vitamin C Brightening Serum</div>
+            <div class="item-meta">
+            <div class="item-meta-row"><span>Qty:</span><strong>1</strong></div>
+            <div class="item-meta-row"><span>Shipping:</span><strong>₱80</strong></div>
+            </div>
+          </div>
+          <div class="item-total-col">
+            <div class="item-price">₱850</div>
+            <div class="item-ship-tag">incl. shipping</div>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="item-thumb" aria-hidden="true">
+            <span>Image</span>
+          </div>
+          <div class="item-info">
+            <div class="item-name">Hydra-Boost Toner</div>
+            <div class="item-meta">
+            <div class="item-meta-row"><span>Qty:</span><strong>1</strong></div>
+            <div class="item-meta-row"><span>Shipping:</span><strong>₱80</strong></div>
+            </div>
+          </div>
+          <div class="item-total-col">
+            <div class="item-price">₱400</div>
+            <div class="item-ship-tag">incl. shipping</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ② SUMMARY CARD (sticky on desktop, 2nd on mobile) -->
+  <aside class="summary-card">
+    <div class="summary-head">
+      <div class="summary-title">Orders Summary</div>
+    </div>
+    <div class="summary-body">
+      <div class="summary-row"><span>Items (2):</span><strong>₱1,250</strong></div>
+      <div class="summary-row"><span>Shipping:</span><strong>₱160</strong></div>
+      <div class="summary-row"><span>Tax (12%):</span><strong>₱150</strong></div>
+      <div class="summary-total">
+        <span>Total:</span>
+        <span class="total-amount">₱1,560</span>
+      </div>
+    </div>
+    <div class="summary-footer">
+      <div class="note-box">
+        <span class="note-icon">ℹ️</span>
+        <span>Please review all information and order details before proceeding.</span>
+      </div>
+      <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+  </aside>
+
+  <!-- ③ SHIPPING + PAYMENT CARD (combined, 3rd on mobile) -->
+  <div class="card card-forms">
+    <div class="card-head">
+      <span class="card-title">Shipping &amp; Payment</span>
+    </div>
+    <div class="card-body">
+
+      <!-- ─── SHIPPING INFORMATION ─── -->
+      <div class="section-divider"><span>Shipping Information</span></div>
+
+      <label class="check-row" id="same-shipping-row">
+        <input type="checkbox" id="same-shipping" onchange="fillShipping(this)"/>
+        Same info as account
+      </label>
+
+      <div class="form-grid" id="shipping-fields">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="sh-name" type="text" placeholder="Full Name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact No.</label>
+          <input class="form-input" id="sh-phone" type="tel" placeholder="09XX XXX XXXX"/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="sh-email" type="email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Shipping Address</label>
+          <input class="form-input" id="sh-addr" type="text" placeholder="Street, Barangay, City, Province, ZIP"/>
+        </div>
+      </div>
+
+      <!-- ─── PAYMENT METHOD ─── -->
+      <div class="section-divider" style="margin-top:32px;"><span>Payment Method / Information</span></div>
+
+      <div class="pay-tabs">
+        <button class="pay-tab active" onclick="selectPay('visa',this)">Visa</button>
+        <button class="pay-tab" onclick="selectPay('gcash',this)">GCash</button>
+        <button class="pay-tab" onclick="selectPay('maya',this)">Maya</button>
+        <button class="pay-tab" onclick="selectPay('paypal',this)">PayPal</button>
+        <button class="pay-tab" onclick="selectPay('amex',this)">Amex</button>
+        <button class="pay-tab" onclick="selectPay('cod',this)">COD</button>
+      </div>
+
+      <!-- VISA -->
+      <div class="pay-panel active" id="pay-visa">
+        <label class="check-row">
+          <input type="checkbox" onchange="fillBilling(this)"/>
+          Same info as account and shipping
+        </label>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Billing Full Name</label>
+            <input class="form-input billing-name" type="text" placeholder="Name on card"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Billing Address</label>
+            <input class="form-input billing-addr" type="text" placeholder="Billing address"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Card Number</label>
+            <input class="form-input" type="text" placeholder="•••• •••• •••• ••••" maxlength="19" oninput="fmtCard(this)"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Expiration Date</label>
+            <input class="form-input" type="text" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CVV</label>
+            <input class="form-input" type="password" placeholder="•••" maxlength="3"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- GCASH -->
+      <div class="pay-panel" id="pay-gcash">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">GCash Number</label>
+            <input class="form-input" type="tel" placeholder="09XX XXX XXXX" maxlength="13"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAYA -->
+      <div class="pay-panel" id="pay-maya">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Maya Number</label>
+            <input class="form-input" type="tel" placeholder="09XX XXX XXXX" maxlength="13"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYPAL -->
+      <div class="pay-panel" id="pay-paypal">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">PayPal Email</label>
+            <input class="form-input" type="email" placeholder="paypal@example.com"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMEX -->
+      <div class="pay-panel" id="pay-amex">
+        <label class="check-row">
+          <input type="checkbox" onchange="fillBilling(this)"/>
+          Same info as account and shipping
+        </label>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Billing Full Name</label>
+            <input class="form-input billing-name" type="text" placeholder="Name on card"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Billing Address</label>
+            <input class="form-input billing-addr" type="text" placeholder="Billing address"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Card Number</label>
+            <input class="form-input" type="text" placeholder="•••• •••••• •••••" maxlength="17" oninput="fmtAmex(this)"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Expiration Date</label>
+            <input class="form-input" type="text" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CID (4-digit)</label>
+            <input class="form-input" type="password" placeholder="••••" maxlength="4"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- COD -->
+      <div class="pay-panel" id="pay-cod">
+        <div style="background:rgba(249,219,189,0.4);border:1px solid rgba(218,98,125,0.2);border-radius:3px;padding:16px 18px;">
+          <p style="font-size:13.5px;color:var(--wine);line-height:1.7;">
+            Pay in cash upon delivery.<br/>
+            <span style="color:var(--muted);font-size:12.5px;">Please have the exact amount ready. Our courier will collect payment on delivery.</span>
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /card-body -->
+  </div><!-- /card-forms -->
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── Simulated account profile ── */
+const profile = {
+  name:  'Jon Snow',
+  email: 'jdncanthtall8678@mail.com',
+  phone: '09354334633',
+  addr:  '123 Sample St, Quezon City, Metro Manila 1100'
+};
+
+/* ── Shipping autofill ── */
+function fillShipping(cb) {
+  const on = cb.checked;
+  document.getElementById('sh-name').value  = on ? profile.name  : '';
+  document.getElementById('sh-email').value = on ? profile.email : '';
+  document.getElementById('sh-phone').value = on ? profile.phone : '';
+  document.getElementById('sh-addr').value  = on ? profile.addr  : '';
+}
+
+/* ── Billing autofill (inside active pay panel) ── */
+function fillBilling(cb) {
+  const panel = cb.closest('.pay-panel');
+  const on = cb.checked;
+  const bn = panel.querySelector('.billing-name');
+  const ba = panel.querySelector('.billing-addr');
+  if (bn) bn.value = on ? profile.name : '';
+  if (ba) ba.value = on ? (document.getElementById('sh-addr').value || profile.addr) : '';
+}
+
+/* ── Payment tabs ── */
+function selectPay(method, btn) {
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById('pay-' + method);
+  if (panel) panel.classList.add('active');
+}
+
+/* ── Card number formatting ── */
+function fmtCard(input) {
+  let v = input.value.replace(/\D/g,'').slice(0,16);
+  input.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function fmtAmex(input) {
+  let v = input.value.replace(/\D/g,'').slice(0,15);
+  if (v.length > 10) v = v.slice(0,4)+' '+v.slice(4,10)+' '+v.slice(10);
+  else if (v.length > 4) v = v.slice(0,4)+' '+v.slice(4);
+  input.value = v;
+}
+function fmtExp(input) {
+  let v = input.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.slice(0,2)+' / '+v.slice(2,4);
+  input.value = v;
+}
+
+/* ── Place Order ── */
+function placeOrder() {
+  showToast('🎉 Order placed! Thank you.');
+}
+
+/* ── Toast ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>

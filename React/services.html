@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Gilded</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/services.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="home.html">Gilded</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="account-checkout.html">Account</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>Our <span>Services</span></h1>
+    <p>Premium beauty rituals, tailored for you</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <input class="search-input" id="searchInput" type="text" placeholder="Search services..." />
+      <button class="search-btn" type="button" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke-width="1.8" />
+          <path d="M16.5 16.5L21 21" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-pills">
+    <button class="pill active" data-category="all">All</button>
+    <button class="pill" data-category="Hair Care">Hair Care</button>
+    <button class="pill" data-category="Skin Care">Skin Care</button>
+    <button class="pill" data-category="Nail Care">Nail Care</button>
+    <button class="pill" data-category="Make Up">Make Up</button>
+  </div>
+
+  <div class="sort-wrap">
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Sort by: Featured</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+    </select>
+  </div>
+
+  <div class="container">
+    <div class="section-heading">Our Services</div>
+    <div class="section-sub">Reserve your next appointment with ease</div>
+    <div class="item-grid" id="services-grid"></div>
+  </div>
+
+  <div class="overlay" id="detailOverlay">
+    <div class="overlay-box">
+      <div class="overlay-top-bar">
+        <button class="back-btn" id="backBtn">&larr; Back to Services</button>
+        <span class="overlay-top-title">Service Detail</span>
+      </div>
+      <div class="overlay-body">
+        <div class="image-viewer">
+          <div class="big-img" id="mainDetailImg">
+            <span class="img-count-badge" id="imgCountBadge">1 / 4</span>
+          </div>
+          <div class="thumbnail-bar" id="thumbBar"></div>
+        </div>
+        <div class="info-pane">
+          <div class="overlay-brand" id="itemBrand">Category</div>
+          <h2 class="overlay-name" id="itemName">Service Name</h2>
+          <div class="overlay-rating">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span id="ratingInfo">5.0 (Reviews)</span>
+          </div>
+          <div class="overlay-price" id="itemPrice">PHP 0</div>
+          <div class="info-section">
+            <h4>Service Highlights</h4>
+            <div class="info-tags" id="infoTags"></div>
+          </div>
+          <div class="qty-row">
+            <span class="qty-label">Sessions</span>
+            <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="99">
+          </div>
+          <div class="action-btns">
+            <button class="btn-primary" id="addToCartBtn">Save Service</button>
+            <button class="btn-secondary" id="buyNowBtn">Book Now</button>
+          </div>
+        </div>
+        <div class="review-area">
+          <div class="review-header">
+            <h3>Client Reviews</h3>
+            <span class="review-count-badge" id="reviewCountBadge">Showing top reviews</span>
+          </div>
+          <div class="reviews-list" id="reviewsList"></div>
+          <div class="add-review">
+            <h4>Share Your Experience</h4>
+            <div class="review-form-grid">
+              <input type="text" id="reviewerName" placeholder="Your name">
+              <input type="text" id="reviewerDate" placeholder="Today's date (optional)">
+            </div>
+            <div class="star-picker" id="starPicker">
+              <span data-stars="1">&#9733;</span>
+              <span data-stars="2">&#9733;</span>
+              <span data-stars="3">&#9733;</span>
+              <span data-stars="4">&#9733;</span>
+              <span data-stars="5">&#9733;</span>
+            </div>
+            <textarea id="reviewText" placeholder="What did you love about this service?"></textarea>
+            <button class="submit-review-btn" id="submitReviewBtn">Submit Review</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="scripts/services/services.js"></script>
+</body>
+</html>

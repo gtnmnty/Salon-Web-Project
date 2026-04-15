@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Appointments – Gilded Cosmetics</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/appointments.css">
+</head>
+
+<body>
+  <nav>
+    <a class="nav-brand" href="#home">Gilded</span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="account-checkout.html">Account</a></li>
+      </ul>
+  </nav>
+
+  <div class="page">
+    <div class="page-top">
+      <a href="#" class="back-link">← Back</a>
+      <h1 class="page-title"><em>Appointments</em></h1>
+    </div>
+
+    <div class="appt-tabs">
+      <button class="tab active" onclick="setTab(this,'all')">All</button>
+      <button class="tab" onclick="setTab(this,'upcoming')">Upcoming</button>
+      <button class="tab" onclick="setTab(this,'completed')">Completed</button>
+      <button class="tab" onclick="setTab(this,'cancelled')">Cancelled</button>
+    </div>
+
+    <div class="appt-list">
+      <!-- UPCOMING -->
+      <div class="appt-card" data-status="upcoming">
+        <div class="appt-top">
+          <span class="appt-id">Booking #APT-0391</span>
+          <span class="appt-badge badge-confirmed">Upcoming</span>
+        </div>
+        <div class="appt-body">
+          <div class="appt-img">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10z" stroke="#A53860"
+                stroke-width="1.5" />
+              <path d="M10 50c0-11 9-20 20-20s20 9 20 20" stroke="#A53860" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M38 34l6 6-6 6" stroke="#A53860" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="appt-info">
+            <p class="appt-service">Full Hair Treatment &amp; Style</p>
+            <div class="appt-meta">
+              <div class="appt-row"><span class="appt-lbl">Branch</span><span class="appt-val">Quezon City –
+                  Cubao</span></div>
+              <div class="appt-row"><span class="appt-lbl">Date</span><span class="appt-val">March 21, 2026</span></div>
+              <div class="appt-row"><span class="appt-lbl">Time</span><span class="appt-val">8:00 – 9:00 AM</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="appt-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-rebook">Reschedule</button>
+        </div>
+      </div>
+
+      <!-- UPCOMING 2 -->
+      <div class="appt-card" data-status="upcoming">
+        <div class="appt-top">
+          <span class="appt-id">Booking #APT-0388</span>
+          <span class="appt-badge badge-upcoming">Upcoming</span>
+        </div>
+        <div class="appt-body">
+          <div class="appt-img">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="14" y="12" width="32" height="36" rx="4" stroke="#A53860" stroke-width="1.5" />
+              <path d="M22 24h16M22 32h10" stroke="#A53860" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M22 18h16" stroke="#A53860" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="appt-info">
+            <p class="appt-service">Nail Art &amp; Spa Manicure</p>
+            <div class="appt-meta">
+              <div class="appt-row"><span class="appt-lbl">Branch</span><span class="appt-val">Quezon City –
+                  Cubao</span></div>
+              <div class="appt-row"><span class="appt-lbl">Date</span><span class="appt-val">March 25, 2026</span></div>
+              <div class="appt-row"><span class="appt-lbl">Time</span><span class="appt-val">2:00 – 3:30 PM</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="appt-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-rebook">Book Again</button>
+        </div>
+      </div>
+
+      <!-- COMPLETED -->
+      <div class="appt-card" data-status="completed">
+        <div class="appt-top">
+          <span class="appt-id">Booking #APT-0372</span>
+          <span class="appt-badge badge-completed">Completed</span>
+        </div>
+        <div class="appt-body">
+          <div class="appt-img">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="18" stroke="#A53860" stroke-width="1.5" />
+              <path d="M22 30l6 6 10-12" stroke="#A53860" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="appt-info">
+            <p class="appt-service">Signature Facial &amp; Glow Treatment</p>
+            <div class="appt-meta">
+              <div class="appt-row"><span class="appt-lbl">Branch</span><span class="appt-val">Quezon City –
+                  Cubao</span></div>
+              <div class="appt-row"><span class="appt-lbl">Date</span><span class="appt-val">March 3, 2026</span></div>
+              <div class="appt-row"><span class="appt-lbl">Time</span><span class="appt-val">10:00 – 11:00 AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="appt-actions">
+          <button class="btn-cancel btn-disabled">Cancel</button>
+          <button class="btn-rebook">Book Again</button>
+        </div>
+      </div>
+
+      <!-- CANCELLED -->
+      <div class="appt-card" data-status="cancelled">
+        <div class="appt-top">
+          <span class="appt-id">Booking #APT-0361</span>
+          <span class="appt-badge badge-cancelled">Cancelled</span>
+        </div>
+        <div class="appt-body">
+          <div class="appt-img">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="18" stroke="#A53860" stroke-width="1.5" />
+              <path d="M22 22l16 16M38 22L22 38" stroke="#A53860" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="appt-info">
+            <p class="appt-service">Lash Lift &amp; Brow Shaping</p>
+            <div class="appt-meta">
+              <div class="appt-row"><span class="appt-lbl">Branch</span><span class="appt-val">Quezon City –
+                  Cubao</span></div>
+              <div class="appt-row"><span class="appt-lbl">Date</span><span class="appt-val">February 18, 2026</span>
+              </div>
+              <div class="appt-row"><span class="appt-lbl">Time</span><span class="appt-val">1:00 – 2:00 PM</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="appt-actions">
+          <button class="btn-cancel btn-disabled">Cancel</button>
+          <button class="btn-rebook">Book Again</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <p>No appointments found.</p>
+      <button class="btn-book-now">Book a Service</button>
+    </div>
+  </div>
+
+  <script> </script>
+</body>
+</html>

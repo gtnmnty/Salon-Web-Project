@@ -1,0 +1,36 @@
+:root {
+  --blush: #F9DBBD;
+  --rose: #FFA5AB;
+  --mauve: #DA627D;
+  --wine: #A53860;
+  --deep: #450920;
+  --white: #fff;
+  --off: #FDF7F2;
+
+  --navy: #001f3f;
+  --teal: #004d4d;
+  --gold: #C5A059;
+  --ivory: #F8F9FA;
+  --dark: #121212;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--off);
+  color: var(--deep);
+  font-family: 'Jost', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  --webkit-scrollbar: none;
+}
