@@ -1,0 +1,71 @@
+.booking-card {
+  max-width: 800px;
+  margin: 4rem auto;
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(69, 9, 32, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--deep);
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1.5px solid var(--blush);
+  border-radius: 6px;
+}
+
+/* Address fields container */
+#addressSection {
+  display: none;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #fffcf9;
+  border: 1px dashed var(--blush);
+  border-radius: 8px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit {
+  background: var(--wine);
+  color: white;
+}
+
+.btn-clear {
+  background: var(--off);
+  color: var(--wine);
+  border: 1px solid var(--blush);
+}
