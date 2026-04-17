@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded - Book an Appointment</title>
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/booking.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="nav-brand" href="#home">Gilded</span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+  </nav>
+
+  <div class="booking-card">
+    <h1 style="text-align: center; color: var(--deep); margin-bottom: 2rem;">Book an Appointment</h1>
+
+    <label class="check-box-container">
+      <input type="checkbox" id="sameInfoCheck"> Same info as account
+    </label>
+
+    <form id="bookingForm">
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="Full Name">
+        </div>
+
+        <div class="input-group">
+          <label>Contact No.</label>
+          <input type="text" id="contactNo" placeholder="09XX XXX XXXX">
+        </div>
+
+        <div class="input-group">
+          <label>Type of Service</label>
+          <select id="serviceType" onchange="toggleFields()">
+            <option value="walkin">Walk-in</option>
+            <option value="home">Home Service</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Preferred Date</label>
+          <input type="date">
+        </div>
+      </div>
+
+      <div id="walkinSection">
+        <div class="input-group">
+          <label>Select Branch</label>
+          <select>
+            <option>Cubao</option>
+            <option>Makati</option>
+            <option>Pasig</option>
+            <option>Fairview</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="addressSection">
+        <p style="font-weight: bold; margin-bottom: 10px; color: var(--wine);">Service Address</p>
+        <div class="form-grid">
+          <div class="input-group"><label>Street / Home No.</label><input type="text" id="street"></div>
+          <div class="input-group"><label>Barangay</label><input type="text" id="barangay"></div>
+          <div class="input-group"><label>Municipality</label><input type="text" id="municipality"></div>
+          <div class="input-group"><label>Zip Code</label><input type="text" id="zipcode"></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Select Preferred Service</label>
+        <select>
+          <option>Bridal Makeup</option>
+          <option>Facial Care</option>
+          <option>Hair Care</option>
+          <option>Nail Care</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button type="reset" class="btn btn-clear">Clear</button>
+        <button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="scripts/booking.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GILDED – Cosmetics & Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ── RESET & BASE ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --blush: #F9DBBD;
+      --rose: #FFA5AB;
+      --mauve: #DA627D;
+      --wine: #A53860;
+      --deep: #450920;
+      --white: #fff;
+      --off: #FDF7F2;
+      --navy: #001f3f;
+      --teal: #004d4d;
+      --gold: #C5A059;
+      --gold-light: #e8c98a;
+      --ivory: #F8F9FA;
+      --dark: #121212;
+      --sand: #E8D5C0;
+      --warm-grey: #f0ebe5;
+      --text-dark: #1a1410;
+      --text-mid: #5c4a3a;
+      --text-light: #9a8070;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--off);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--deep);
+      border-bottom: 1px solid rgba(255, 165, 171, .15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10vw;
+      height: 72px;
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--blush);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--blush);
+      opacity: .85;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .3s, opacity .3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rose);
+      transition: width .35s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--rose);
+      opacity: 1;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+      align-items: center;
+      padding: 5% 7%;
+      gap: 4rem;
+      background: var(--warm-grey);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(249, 219, 189, 0.5) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-left {
+      animation: fadeUp 0.9s 0.2s ease both;
+      z-index: 1;
+    }
+
+    .hero-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      color: var(--text-dark);
+    }
+
+    .hero-logo span {
+      display: block;
+      font-size: clamp(0.75rem, 1.2vw, 1rem);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-top: 0.4rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin: 2rem 0 2.5rem;
+      max-width: 380px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 1.6rem;
+      border-radius: 2px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-outline-blush {
+      background: rgba(249, 219, 189, 0.4);
+      border-color: var(--blush);
+      color: var(--text-dark);
+    }
+
+    .btn-outline-blush:hover {
+      background: var(--blush);
+      border-color: var(--gold);
+    }
+
+    .btn-dark {
+      background: var(--dark);
+      color: var(--white);
+      border-color: var(--dark);
+      width: 100%;
+      max-width: 390px;
+      text-align: center;
+    }
+
+    .btn-dark:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--dark);
+    }
+
+    /* Hero Right – decorative circle + rating */
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: fadeUp 0.9s 0.45s ease both;
+    }
+
+    .hero-circle {
+      width: clamp(220px, 35vw, 380px);
+      height: clamp(220px, 35vw, 380px);
+      border-radius: 50%;
+      background: radial-gradient(135deg at 40% 40%, var(--blush) 0%, var(--sand) 60%, #d4b896 100%);
+      position: relative;
+      box-shadow: 0 30px 80px rgba(197, 160, 89, 0.2);
+    }
+
+    .hero-circle::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-model-img {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+
+    .rating-badge {
+      position: absolute;
+      bottom: 12%;
+      left: -5%;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 0.7rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .rating-badge .star {
+      font-size: 1.3rem;
+    }
+
+    .rating-badge .rating-text strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .rating-badge .rating-text small {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      font-weight: 400;
+    }
+
+    /* ── WHAT WE OFFER ── */
+    .section-offer {
+      padding: 6rem 7%;
+      background: var(--off);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      color: var(--text-dark);
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .offer-card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(197, 160, 89, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(197, 160, 89, 0.18);
+    }
+
+    .offer-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--warm-grey);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .offer-img .placeholder-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .offer-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .offer-card:hover .offer-img img {
+      transform: scale(1.06);
+    }
+
+    .offer-info {
+      padding: 1rem 1rem 0.8rem;
+    }
+
+    .offer-info h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .offer-info p {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      line-height: 1.55;
+      margin-bottom: 0.7rem;
+    }
+
+    .offer-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .offer-price {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .offer-more {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-mid);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .offer-more:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ── FEATURED PRODUCTS ── */
+    .section-products {
+      padding: 6rem 7%;
+      background: var(--warm-grey);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .bestseller-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.65rem;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--warm-grey);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-img .placeholder-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      opacity: 0.25;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .product-footer {
+      background: var(--dark);
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .product-price {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .btn-cart {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--blush);
+      border: 1px solid rgba(249, 219, 189, 0.4);
+      padding: 0.35rem 0.6rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-cart:hover {
+      background: var(--blush);
+      color: var(--dark);
+    }
+
+    .btn-buy {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-buy:hover {
+      background: var(--gold-light);
+    }
+
+    .view-all-wrap {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .btn-view-all {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.3s;
+    }
+
+    .btn-view-all:hover {
+      color: var(--gold);
+    }
+
+    /* ── ART OF BEAUTY ── */
+    .section-story {
+      padding: 6rem 7%;
+      background: var(--off);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .story-gallery {
+      position: relative;
+      aspect-ratio: 4/3.2;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--warm-grey);
+    }
+
+    .gallery-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--warm-grey), var(--sand));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--text-light);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-placeholder::before {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    .gallery-placeholder::after {
+      content: '';
+      position: absolute;
+      bottom: 18%;
+      right: 15%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    .gallery-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+    }
+
+    .gallery-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .gallery-dot:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .story-content {}
+
+    .story-content .section-label {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .story-body {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    .story-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-num sup {
+      font-size: 1rem;
+      vertical-align: super;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 5rem 7% 3rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-brand {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-brand h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .footer-brand p {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: var(--gold);
+      margin-top: 0.3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-col h5 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .footer-col ul li a,
+    .footer-col ul li {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold);
+    }
+
+    .footer-col .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col .contact-icon {
+      font-size: 0.85rem;
+      margin-top: 1px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 5%;
+        gap: 2.5rem;
+      }
+
+      .hero-tagline {
+        margin: 1.5rem auto 2rem;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .btn-dark {
+        max-width: 100%;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .offer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-story {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        gap: 1.2rem;
+        padding: 0 4%;
+      }
+
+      nav a {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-brand" href="#home">Gilded</span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-logo">
+        GILDED
+        <span>Cosmetics &amp; Studio</span>
+      </div>
+      <p class="hero-tagline">
+        Where luxury meets artistry. Experience the finest in cosmetics, skincare, and beauty services crafted just for
+        you.
+      </p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-outline-blush">Explore Services →</a>
+        <a href="#" class="btn btn-outline-blush">Shop Products</a>
+        <a href="#" class="btn btn-dark">Book Now</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-circle">
+        <!-- Decorative floral pattern overlay -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;border-radius:50%;opacity:0.15"
+          viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="140" stroke="#8B6914" stroke-width="0.8" />
+          <circle cx="200" cy="200" r="100" stroke="#8B6914" stroke-width="0.5" />
+          <path d="M200 60 C230 100 230 160 200 200 C170 160 170 100 200 60Z" fill="#8B6914" />
+          <path d="M200 340 C170 300 170 240 200 200 C230 240 230 300 200 340Z" fill="#8B6914" />
+          <path d="M60 200 C100 170 160 170 200 200 C160 230 100 230 60 200Z" fill="#8B6914" />
+          <path d="M340 200 C300 230 240 230 200 200 C240 170 300 170 340 200Z" fill="#8B6914" />
+          <path d="M112 112 C140 140 155 170 200 200 C170 155 140 140 112 112Z" fill="#8B6914" />
+          <path d="M288 288 C260 260 245 230 200 200 C230 245 260 260 288 288Z" fill="#8B6914" />
+          <path d="M288 112 C260 140 245 170 200 200 C230 155 260 140 288 112Z" fill="#8B6914" />
+          <path d="M112 288 C140 260 155 230 200 200 C170 245 140 260 112 288Z" fill="#8B6914" />
+        </svg>
+      </div>
+
+      <div class="rating-badge">
+        <span class="star">⭐</span>
+        <div class="rating-text">
+          <strong>5.0 Rating</strong>
+          <small>500+ Reviews</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT WE OFFER ── -->
+  <section class="section-offer">
+    <p class="section-label reveal">Our Specialties</p>
+    <h2 class="section-title reveal">What We Offer</h2>
+
+    <div class="offer-grid">
+      <!-- Card 1 -->
+      <div class="offer-card reveal reveal-delay-1">
+        <div class="offer-img">
+          <div class="placeholder-icon">💆</div>
+        </div>
+        <div class="offer-info">
+          <h4>Facial Treatments</h4>
+          <p>Your special day deserves flawless elegance and radiant skin care.</p>
+          <div class="offer-footer">
+            <span class="offer-price">₱7,350.85</span>
+            <a href="#" class="offer-more">More →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="offer-card reveal reveal-delay-2">
+        <div class="offer-img">
+          <div class="placeholder-icon">💇</div>
+        </div>
+        <div class="offer-info">
+          <h4>Hair Styling</h4>
+          <p>Your special day deserves flawless elegance and expert styling.</p>
+          <div class="offer-footer">
+            <span class="offer-price">₱7,350.85</span>
+            <a href="#" class="offer-more">More →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="offer-card reveal reveal-delay-3">
+        <div class="offer-img">
+          <div class="placeholder-icon">💅</div>
+        </div>
+        <div class="offer-info">
+          <h4>Nail Artistry</h4>
+          <p>Your special day deserves flawless elegance and creative nail art.</p>
+          <div class="offer-footer">
+            <span class="offer-price">₱7,350.85</span>
+            <a href="#" class="offer-more">More →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="offer-card reveal reveal-delay-4">
+        <div class="offer-img">
+          <div class="placeholder-icon">✨</div>
+        </div>
+        <div class="offer-info">
+          <h4>Bridal Packages</h4>
+          <p>Your special day deserves flawless elegance and timeless beauty.</p>
+          <div class="offer-footer">
+            <span class="offer-price">₱7,350.85</span>
+            <a href="#" class="offer-more">More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED PRODUCTS ── -->
+  <section class="section-products">
+    <p class="section-label reveal">Shop the Collection</p>
+    <h2 class="section-title reveal">Featured Products</h2>
+
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="product-card reveal reveal-delay-1">
+        <span class="bestseller-tag">Best Seller</span>
+        <div class="product-img">
+          <div class="placeholder-icon">🧴</div>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-name">Glow Serum</div>
+            <div class="product-price">₱3,947.40</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn-cart">Add to Cart</button>
+            <button class="btn-buy">Buy</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product-card reveal reveal-delay-2">
+        <span class="bestseller-tag">Best Seller</span>
+        <div class="product-img">
+          <div class="placeholder-icon">💄</div>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-name">Velvet Rouge</div>
+            <div class="product-price">₱3,947.40</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn-cart">Add to Cart</button>
+            <button class="btn-buy">Buy</button>
+          </div>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product-card reveal reveal-delay-3">
+        <span class="bestseller-tag">Best Seller</span>
+        <div class="product-img">
+          <div class="placeholder-icon">🌸</div>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-name">Rose Mist Toner</div>
+            <div class="product-price">₱3,947.40</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn-cart">Add to Cart</button>
+            <button class="btn-buy">Buy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-all-wrap reveal">
+      <a href="#" class="btn-view-all">View All Products</a>
+    </div>
+  </section>
+
+  <!-- ── THE ART OF BEAUTY ── -->
+  <section class="section-story">
+    <div class="story-gallery reveal">
+      <div class="gallery-placeholder">
+        <span>Image 1</span>
+        <div class="gallery-nav">
+          <button class="gallery-dot" aria-label="Previous"></button>
+          <button class="gallery-dot" aria-label="Next"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-content reveal reveal-delay-2">
+      <p class="section-label">Our Philosophy</p>
+      <h2 class="story-title">The Art of Beauty</h2>
+      <p class="story-body">
+        At GILDED, we believe that beauty is an art form. Our team of expert artists and stylists are dedicated to
+        bringing out your unique radiance through personalized treatments and premium products.
+      </p>
+      <p class="story-body">
+        Founded with a passion for excellence, we've been transforming our clients' beauty experiences for over a
+        decade. Every service is crafted with precision, care, and the finest ingredients.
+      </p>
+
+      <div class="story-stats">
+        <div class="stat-item">
+          <div class="stat-num">10<sup>+</sup></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5K<sup>+</sup></div>
+          <div class="stat-label">Satisfied Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">17<sup>+</sup></div>
+          <div class="stat-label">Expert Artists</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">
+      <h2>GILDED</h2>
+      <p>Cosmetics and Studio</p>
+    </div>
+
+    <div class="footer-grid">
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Log in / Sign Up</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Area -->
+      <div class="footer-col">
+        <h5>Customer Area</h5>
+        <ul>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Orders</a></li>
+          <li><a href="#">Cart</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Warranty and Return Policy</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h5>Contact &amp; Support</h5>
+        <ul>
+          <li>
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Address: 35G Liberty Avenue, Cubao, Quezon City</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <span>gildedsupport@gilded.com.ph | 0927-014-1681</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <span>Mon–Sun: 10:00 AM – 7:00 PM</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-item">
+              <span class="contact-icon">🚚</span>
+              <span>Nationwide Shipping (Luzon, Visayas &amp; Mindanao)</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-item">
+              <span class="contact-icon">📌</span>
+              <span>Multiple branches nationwide</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      Copyright &copy; 2026 – Gilded Cosmetics and Studio
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Gallery nav (simple toggle for demo)
+    const dots = document.querySelectorAll('.gallery-dot');
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        dots.forEach(d => d.style.background = '');
+        dot.style.background = 'rgba(255,255,255,0.5)';
+      });
+    });
+
+    // Cart button feedback
+    document.querySelectorAll('.btn-cart').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const orig = this.textContent;
+        this.textContent = 'Added ✓';
+        this.style.background = 'rgba(197,160,89,0.3)';
+        this.style.color = '#C5A059';
+        setTimeout(() => {
+          this.textContent = orig;
+          this.style.background = '';
+          this.style.color = '';
+        }, 1500);
+      });
+    });
+  </script>
+</body>
+
+</html>

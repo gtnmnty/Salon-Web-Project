@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded - Account Access</title>
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="image-side">
+      <div class="image-slider">
+        <div class="slide login-slide active" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80'); animation-delay: 0s;"></div>
+        <div class="slide login-slide active" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1200&q=80'); animation-delay: 2s;"></div>
+        <div class="slide login-slide active" style="background-image: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80'); animation-delay: 4s;"></div>
+        
+        <div class="slide signup-slide" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80'); animation-delay: 0s;"></div>
+        <div class="slide signup-slide" style="background-image: url('https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=80'); animation-delay: 2s;"></div>
+        <div class="slide signup-slide" style="background-image: url('https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&w=1200&q=80'); animation-delay: 4s;"></div>
+      </div>
+      <div class="image-overlay">
+        <h2 id="overlayTitle">Welcome Back</h2>
+        <p id="overlayText">Your beauty journey continues here. Sign in to manage your appointments.</p>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div id="loginForm" class="auth-form active">
+        <h1 class="form-title">Log in</h1>
+        <p class="form-subtitle">Access your account</p>
+
+        <div class="input-group">
+          <label>Email or Phone Number</label>
+          <input type="text" placeholder="your@email.com">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password">
+        </div>
+
+        <button class="btn-main">Log in</button>
+
+        <p class="toggle-text" style="text-align: center; font-size: 0.9rem;">
+          Don't have an account?
+          <span onclick="switchToSignup()">Create Account Now</span>
+        </p>
+        
+        <div class="social-btns">
+            <button class="social-btn">Google</button>
+            <button class="social-btn">Apple</button>
+        </div>
+      </div>
+
+      <div id="signupForm" class="auth-form">
+        <h1 class="form-title">Sign Up</h1>
+        <p class="form-subtitle">Join the Gilded community</p>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Full Name">
+          </div>
+          <div class="input-group">
+            <label>Phone No.</label>
+            <input type="text" placeholder="09XX XXX XXXX">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="Create a password">
+        </div>
+
+        <label class="terms-check">
+          <input type="checkbox">
+          <span>I agree to the <button class="inline-link" type="button">Terms & Privacy</button></span>
+        </label>
+
+        <button class="btn-main">Create Account</button>
+
+        <p class="toggle-text" style="text-align: center; font-size: 0.9rem;">
+          Already Have an Account?
+          <span onclick="switchToLogin()">Log in here.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/auth.js"></script>
+</body>
+</html>
