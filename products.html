@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav>
-    <a class="nav-brand" href="#home">Gilded</span>
+    <a class="nav-brand" href="index.html">Gilded</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
@@ -58,8 +58,8 @@
 
   <div class="container">
     <div class="section-heading">Our Products</div>
-    <div class="section-sub">Free delivery on orders over ₱2,000</div>
-    <div class="item-grid" id="products-grid"></div>
+    <div class="section-sub">Reserve your next appointment with ease</div>
+    <div class="items-grid" id="products-grid"></div>
   </div>
 
   <!-- OVERLAY -->
@@ -79,6 +79,7 @@
         <div class="info-pane">
           <div class="overlay-brand" id="itemBrand">Brand</div>
           <h2 class="overlay-name" id="itemName">Product Name</h2>
+          <p class="overlay-desc" id="itemDesc"></p>
           <div class="overlay-rating">
             <span class="stars">★★★★★</span>
             <span id="ratingInfo">5.0 (Reviews)</span>
@@ -90,11 +91,13 @@
           </div>
           <div class="qty-row">
             <span class="qty-label">Qty</span>
-            <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="99">
+            <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="10">
+              <button class="btn-qty-update" id="qtyUpdateBtn" type="button">Update</button>
           </div>
           <div class="action-btns">
             <button class="btn-primary" id="addToCartBtn">Add to Cart</button>
-            <button class="btn-secondary" id="buyNowBtn">Buy Now</button>
+            <button class="btn-secondary" id="buyNowBtn"><a href="checkout.html" target="_blank"></a>
+              Buy Now</button>
           </div>
         </div>
         <div class="review-area">
