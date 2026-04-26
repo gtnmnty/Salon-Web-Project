@@ -6,7 +6,7 @@
 /* ─── Hero ───────────────────────────────── */
 .page-hero {
   background: linear-gradient(160deg, var(--deep) 0%, var(--wine) 55%, var(--mauve) 100%);
-  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 3rem);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -16,15 +16,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, var(--wine) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
 }
 
 .page-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, calc(1.65rem + 2.8vw), 4.4rem);
   font-weight: 300;
   color: var(--white);
-  letter-spacing: 4px;
+  letter-spacing: 0.1em;
   position: relative;
 }
 
@@ -35,15 +35,15 @@
 
 .page-hero p {
   color: rgba(255, 255, 255, 0.55);
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
-  letter-spacing: 2px;
+  font-size: clamp(0.78rem, calc(0.72rem + 0.18vw), 0.92rem);
+  letter-spacing: 0.22em;
   margin-top: 0.5rem;
   text-transform: uppercase;
   position: relative;
 }
 
 .hero-line {
-  width: 60px;
+  width: clamp(3rem, 7vw, 4.2rem);
   height: 1px;
   background: var(--blush);
   margin: 1.2rem auto 0;
@@ -51,9 +51,8 @@
 
 /* ─── Search Bar ─────────────────────────── */
 .search-wrap {
-  max-width: 1200px;
-  margin: clamp(1.2rem, 3vw, 2rem) auto clamp(0.8rem, 2vw, 1.2rem);
-  padding: 0 clamp(1rem, 3vw, 20px);
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 2.5rem)), 75rem);
+  margin: clamp(1.4rem, 3vw, 2rem) auto clamp(0.9rem, 2vw, 1.2rem);
 }
 
 .search-box {
@@ -61,9 +60,10 @@
   align-items: center;
   background: var(--white);
   border: 1px solid rgba(165, 56, 96, 0.2);
-  border-radius: 6px;
+  border-radius: clamp(0.45rem, 0.8vw, 0.7rem);
   overflow: hidden;
   box-shadow: 0 8px 40px rgba(69, 9, 32, 0.12);
+  margin: clamp(1.25rem, 2.2vw, 2rem) auto;
 }
 
 .search-input {
@@ -71,8 +71,8 @@
   border: none;
   outline: none;
   font-family: 'Jost', sans-serif;
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  padding: clamp(12px, 2.5vw, 18px) clamp(12px, 2.5vw, 20px);
+  font-size: clamp(0.94rem, calc(0.84rem + 0.2vw), 1.05rem);
+  padding: clamp(1rem, 1.4vw, 1.2rem) clamp(1rem, 1.8vw, 1.35rem);
   color: var(--deep);
   background: transparent;
 }
@@ -83,48 +83,48 @@
 }
 
 .search-btn {
+  width: clamp(3.75rem, 8vw, 5rem);
+  flex: 0 0 clamp(3.75rem, 8vw, 5rem);
   background: var(--wine);
   border: none;
   cursor: pointer;
   display: flex;
-  padding: clamp(0.9rem, 2.5vw, 1.5rem);
+  padding: clamp(1rem, 1.8vw, 1.4rem);
   align-items: center;
   justify-content: center;
   transition: background 0.25s;
-  flex-shrink: 0;
 }
 
 .search-btn:hover { background: var(--deep); }
 
 .search-btn svg {
-  width: clamp(18px, 3vw, 24px);
-  height: clamp(18px, 3vw, 24px);
+  width: clamp(1.2rem, 2.5vw, 1.5rem);
+  height: clamp(1.2rem, 2.5vw, 1.5rem);
   stroke: var(--white);
 }
 
 /* ─── Filter Pills ───────────────────────── */
 .filter-pills {
-  max-width: 1200px;
-  margin: 0 auto clamp(0.8rem, 2vw, 1rem);
-  padding: 0 clamp(1rem, 3vw, 20px);
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 2.5rem)), 75rem);
+  margin: 0 auto clamp(0.9rem, 2vw, 1rem);
   display: flex;
   justify-content: center;
-  gap: clamp(6px, 1.5vw, 10px);
+  gap: clamp(0.55rem, 1vw, 0.75rem);
   flex-wrap: wrap;
 }
 
 .pill {
   font-family: 'Jost', sans-serif;
-  font-size: clamp(0.72rem, 1.5vw, 1rem);
-  letter-spacing: 0.2em;
+  font-size: clamp(0.75rem, calc(0.66rem + 0.22vw), 0.95rem);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(0.8rem, 2.5vw, 1.5rem);
+  padding: clamp(0.7rem, 1.3vw, 0.82rem) clamp(1rem, 2vw, 1.45rem);
   border: 1px solid rgba(165, 56, 96, 0.25);
-  border-radius: 20px;
+  border-radius: 999px;
   cursor: pointer;
   background: transparent;
   color: var(--wine);
-  transition: background 0.25s, color 0.25s;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
 }
 
 .pill:hover,
@@ -136,9 +136,8 @@
 
 /* ─── Sort ───────────────────────────────── */
 .sort-wrap {
-  max-width: 1200px;
-  margin: 0 auto clamp(1rem, 2.5vw, 1.5rem);
-  padding: 0 clamp(1rem, 3vw, 20px);
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 2.5rem)), 75rem);
+  margin: 0 auto clamp(1.2rem, 2.4vw, 1.75rem);
   display: flex;
   justify-content: flex-end;
 }
@@ -146,10 +145,10 @@
 .sort-select {
   border: 1px solid rgba(165, 56, 96, 0.25);
   border-radius: 6px;
-  padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 18px);
+  padding: clamp(0.7rem, 1vw, 0.85rem) clamp(0.95rem, 1.5vw, 1.15rem);
   font-family: 'Jost', sans-serif;
-  font-size: clamp(0.72rem, 1.5vw, 0.85rem);
-  letter-spacing: 0.1em;
+  font-size: clamp(0.78rem, calc(0.72rem + 0.14vw), 0.88rem);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--wine);
   background: var(--white);
@@ -159,12 +158,6 @@
 
 /* ─── Products Grid Wrapper ──────────────── */
 #products-grid {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) clamp(3rem, 6vw, 5rem);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, 2.5vw, 24px);
   align-items: start;
 }
 
@@ -260,8 +253,8 @@
 
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(16rem, 30vw, 18.75rem), 1fr));
-  gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fill, minmax(clamp(18rem, 31vw, 20.5rem), 1fr));
+  gap: clamp(1.15rem, 2.6vw, 2rem);
 }
 
 /* ═══════════════════════════════════════════
@@ -286,7 +279,7 @@
 
 /* Image */
 .card-img {
-  height: clamp(160px, 28vw, 240px);
+  height: clamp(13rem, 29vw, 16.75rem);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -312,7 +305,7 @@
 
 /* Content area */
 .card-content {
-  padding: clamp(14px, 2.5vw, 20px) clamp(14px, 2.5vw, 22px);
+  padding: clamp(1rem, 2vw, 1.4rem);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -333,10 +326,10 @@
 /* Product name */
 .card-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-size: clamp(1.25rem, calc(1rem + 0.55vw), 1.65rem);
   font-weight: 600;
   color: var(--text-dark, #1a1410);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   line-height: 1.2;
 }
 
@@ -344,21 +337,22 @@
 .card-rating {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: clamp(0.35rem, 0.8vw, 0.55rem);
+  margin-bottom: clamp(0.55rem, 1vw, 0.8rem);
 }
 
-.stars { color: var(--gold, #C5A059); font-size: clamp(0.7rem, 1.4vw, 0.85rem); letter-spacing: 1px; }
+.stars { color: var(--gold, #C5A059); font-size: 0.85rem; letter-spacing: 1px; }
 
-.rating-count { font-size: clamp(0.58rem, 1.1vw, 0.7rem); color: var(--text-light, #9a8070); }
+.rating-count { font-size: 0.75rem; color: var(--text-light, #9a8070); }
 
 /* Price */
 .card-price {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  font-size: clamp(1.35rem, calc(1.05rem + 0.7vw), 1.7rem);
   font-weight: 600;
   color: var(--mauve, #DA627D);
-  margin-bottom: clamp(10px, 2vw, 14px);
+  margin-bottom: clamp(0.85rem, 1.4vw, 1.15rem);
 }
 
 /* ── Qty stepper (guest-style) ── */
@@ -450,7 +444,8 @@
 /* ── Card action buttons ── */
 .card-actions {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: clamp(0.45rem, 0.8vw, 0.65rem);
   margin-top: auto;
 }
 
@@ -460,10 +455,10 @@
   color: var(--white);
   border: none;
   border-radius: 4px;
-  padding: clamp(2px, 1vw, 3px) clamp(2px, 0.1%, 8px);
+  padding: clamp(0.6rem, 0.8vw, 0.75rem) clamp(0.65rem, 0.9vw, 0.8rem);
   font-family: 'Jost', sans-serif;
-  font-size: clamp(0.6rem, 1.1vw, 0.72rem);
-  letter-spacing: 1.8px;
+  font-size: clamp(0.68rem, calc(0.64rem + 0.12vw), 0.76rem);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
@@ -480,10 +475,10 @@
   background: transparent;
   border: 1.5px solid var(--wine, #A53860);
   color: var(--wine, #A53860);
-  padding: clamp(8px, 1.5vw, 11px) clamp(10px, 2vw, 14px);
+  padding: clamp(0.6rem, 0.8vw, 0.75rem) clamp(0.85rem, 1.2vw, 1rem);
   font-family: 'Jost', sans-serif;
-  font-size: clamp(0.6rem, 1.1vw, 0.72rem);
-  letter-spacing: 1.5px;
+  font-size: clamp(0.68rem, calc(0.64rem + 0.12vw), 0.76rem);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 4px;
@@ -976,11 +971,8 @@
 
 /* Tablet landscape */
 @media (max-width: 1024px) {
-  .item-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-  #products-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(16.5rem, 42vw, 19rem), 1fr));
   }
 }
 
@@ -1009,11 +1001,7 @@
   }
   .review-form-grid { grid-template-columns: 1fr; }
   .action-btns { flex-direction: column; }
-  .item-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  #products-grid {
+  .items-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
@@ -1024,8 +1012,14 @@
 @media (max-width: 480px) {
   .filter-pills { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
   .pill { flex-shrink: 0; }
-  .item-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  #products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0.75rem 0.75rem 3rem; }
+  .page-hero {
+    padding: clamp(2.5rem, 12vw, 3.5rem) 1.2rem clamp(2rem, 8vw, 2.4rem);
+  }
+  .search-btn {
+    width: clamp(3.5rem, 16vw, 4.2rem);
+    flex-basis: clamp(3.5rem, 16vw, 4.2rem);
+  }
+  .items-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card-content { padding: 10px 12px; }
   .card-qty-row { gap: 6px; }
   .card-actions { flex-direction: column; gap: 6px; }
@@ -1034,6 +1028,5 @@
 
 /* Very small mobile */
 @media (max-width: 360px) {
-  .item-grid { grid-template-columns: 1fr; }
-  #products-grid { grid-template-columns: 1fr; }
+  .items-grid { grid-template-columns: 1fr; }
 }

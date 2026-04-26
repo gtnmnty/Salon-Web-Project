@@ -202,7 +202,7 @@ function goToBooking(service) {
 
   sessionStorage.setItem('selectedService', service.name);
   sessionStorage.setItem('selectedServiceCategory', service.category);
-  window.location.href = 'booking.html';
+  window.location.href = 'booking2.html';
 }
 
 function initEvents() {
