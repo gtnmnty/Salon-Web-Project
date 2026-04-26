@@ -51,18 +51,24 @@ body::before {
 
 
 .top-bar {
-  position: sticky;
   top: 0;
   z-index: 50;
   background: rgba(253, 247, 242, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  display: flex;
+  padding: 0.75rem 0;
+  min-height: 60px;
+}
+
+.top-bar-inner {
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 2.5rem)), 80rem);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  height: 60px;
 }
 
 .back-link {
@@ -77,6 +83,7 @@ body::before {
   text-decoration: none;
   transition: color 0.2s, gap 0.2s;
   cursor: pointer;
+  justify-self: start;
 }
 
 .back-link:hover {
@@ -94,11 +101,17 @@ body::before {
 
 .page-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 2.5rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--deep);
   text-transform: uppercase;
+  grid-column: 2;
+  justify-self: center;
+}
+
+.top-bar-spacer {
+  grid-column: 3;
 }
 
 .step-label {
@@ -111,11 +124,11 @@ body::before {
 .checkout-wrapper {
   position: relative;
   z-index: 1;
-  max-width: 1120px;
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 2.5rem)), 80rem);
   margin: 0 auto;
-  padding: 36px 40px 80px;
+  padding: 36px 0 80px;
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: minmax(0, 1fr) clamp(430px, 38vw, 500px);
   grid-template-rows: auto;
   gap: 28px;
 
@@ -210,12 +223,12 @@ body::before {
 .order-item {
   border: 1px solid var(--border);
   border-radius: 3px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   background: rgba(255, 255, 255, 0.6);
   display: grid;
-  grid-template-columns: 84px minmax(0, 1fr) auto;
-  gap: 8px 16px;
-  align-items: center;
+  grid-template-columns: 108px minmax(0, 1fr) auto;
+  gap: 12px 20px;
+  align-items: start;
   transition: box-shadow 0.2s;
 }
 
@@ -224,19 +237,37 @@ body::before {
 }
 
 .item-thumb {
-  width: 84px;
-  height: 84px;
+  position: relative;
+  width: 108px;
+  height: 108px;
   border-radius: 3px;
   border: 1px dashed rgba(165, 56, 96, 0.28);
   background: linear-gradient(135deg, rgba(249, 219, 189, 0.85) 0%, rgba(255, 165, 171, 0.55) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   color: var(--wine);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item-thumb.is-empty::after {
+  content: 'Image';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-info {
@@ -245,10 +276,10 @@ body::before {
 
 .item-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--deep);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .item-meta {
@@ -262,6 +293,17 @@ body::before {
   gap: 6px;
   font-size: 13px;
   color: var(--muted);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.item-meta-row:last-child {
+  flex-wrap: nowrap;
+  align-items: baseline;
+}
+
+.item-meta-row span:first-child {
+  min-width: 58px;
 }
 
 .item-meta-row strong {
@@ -269,12 +311,18 @@ body::before {
   font-weight: 500;
 }
 
+.item-meta-row:last-child strong {
+  white-space: nowrap;
+}
+
 .item-total-col {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  gap: 3px;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 120px;
+  padding-top: 6px;
 }
 
 .item-price {
@@ -288,6 +336,16 @@ body::before {
   font-size: 11px;
   color: var(--muted);
   letter-spacing: 0.04em;
+}
+
+.order-empty {
+  border: 1px dashed var(--border);
+  border-radius: 3px;
+  padding: 18px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .form-grid {
@@ -442,6 +500,10 @@ body::before {
   animation: fadeUp 0.4s ease 0.2s both;
 }
 
+.card-order-details {
+  margin-top: 16px;
+}
+
 .summary-head {
   padding: 18px 24px 14px;
   border-bottom: 1px solid var(--border);
@@ -590,7 +652,7 @@ body::before {
 @media (max-width: 900px) {
   .checkout-wrapper {
     grid-template-columns: 1fr;
-    padding: 24px 24px 60px;
+    padding: 24px 0 60px;
     gap: 20px;
   }
 
@@ -601,7 +663,7 @@ body::before {
   }
 
   .top-bar {
-    padding: 0 24px;
+    height: 60px;
   }
 }
 
@@ -611,8 +673,11 @@ body::before {
 ══════════════════════════════════════ */
 @media (max-width: 600px) {
   .top-bar {
-    padding: 0 16px;
     height: 52px;
+  }
+
+  .top-bar-inner {
+    width: min(calc(100% - 1.2rem), 100%);
   }
 
   .page-title {
@@ -624,7 +689,7 @@ body::before {
   }
 
   .checkout-wrapper {
-    padding: 16px 14px 56px;
+    padding: 16px 0 56px;
     gap: 16px;
     display: flex;
     flex-direction: column;
